@@ -6,22 +6,13 @@
 
 Jaya Jaya Institut merupakan salah satu institusi pendidikan tinggi yang telah berdiri sejak tahun 2000 dan telah mencetak ribuan lulusan dengan reputasi yang baik. Namun dalam beberapa tahun terakhir, institusi ini menghadapi tantangan serius berupa tingginya angka mahasiswa yang tidak menyelesaikan pendidikan mereka alias **dropout**.
 
-Tingkat dropout yang tinggi membawa dampak multidimensional bagi institusi:
+Tingkat dropout yang tinggi membawa dampak multidimensional bagi institusi. Dari sisi akreditasi, angka dropout yang tinggi menjadi indikator negatif dalam penilaian akreditasi perguruan tinggi dan berpotensi menurunkan peringkat serta kepercayaan masyarakat. Dari sisi reputasi, calon mahasiswa dan orang tua cenderung memilih institusi dengan tingkat kelulusan tinggi sehingga tingginya dropout merusak citra Jaya Jaya Institut. Dari sisi finansial, setiap mahasiswa yang dropout berarti kehilangan potensi pendapatan jangka panjang dan investasi fasilitas yang tidak optimal. Dari sisi operasional, tingginya angka dropout mempersulit perencanaan kapasitas kelas, alokasi dosen, dan pengelolaan fasilitas kampus.
 
-- **Dampak Akreditasi:** Angka dropout yang tinggi menjadi salah satu indikator negatif dalam penilaian akreditasi perguruan tinggi. Institusi dengan angka dropout tinggi berpotensi mengalami penurunan peringkat akreditasi yang secara langsung memengaruhi kepercayaan masyarakat dan daya saing kampus.
-- **Dampak Reputasi:** Calon mahasiswa dan orang tua cenderung memilih institusi dengan tingkat kelulusan tinggi. Tingginya dropout merusak citra Jaya Jaya Institut di mata publik dan menurunkan daya tarik bagi calon mahasiswa baru.
-- **Dampak Finansial:** Setiap mahasiswa yang dropout berarti kehilangan potensi pendapatan dari biaya pendidikan jangka panjang. Selain itu, investasi yang telah dikeluarkan institusi dalam bentuk fasilitas, dosen, dan sumber daya menjadi tidak optimal.
-- **Dampak Operasional:** Tingginya angka dropout mempersulit perencanaan kapasitas kelas, alokasi dosen, dan pengelolaan fasilitas kampus sehingga efisiensi operasional terganggu.
-
-Berdasarkan data yang dimiliki, sekitar **32.1%** mahasiswa Jaya Jaya Institut tidak menyelesaikan studi mereka. Angka ini jauh di atas ambang batas yang dapat ditoleransi dan memerlukan penanganan sistematis berbasis data.
-
-Selama ini pendekatan yang dilakukan cenderung **reaktif** — institusi baru mengetahui mahasiswa akan dropout setelah prosesnya sudah terlanjur terjadi. Tidak ada sistem peringatan dini yang mampu mengidentifikasi mahasiswa berisiko sejak semester awal sehingga intervensi bisa dilakukan lebih cepat dan tepat sasaran.
-
-Oleh karena itu dibutuhkan sebuah sistem prediksi berbasis **Machine Learning** yang mampu mendeteksi mahasiswa berpotensi dropout sejak dini, mengidentifikasi faktor utama penyebabnya, dan memberikan rekomendasi intervensi yang dapat ditindaklanjuti oleh pihak akademik.
+Berdasarkan data yang dimiliki, sekitar **32.1%** mahasiswa Jaya Jaya Institut tidak menyelesaikan studi mereka — hampir 1 dari 3 mahasiswa. Selama ini pendekatan yang dilakukan cenderung **reaktif**, sehingga dibutuhkan sistem prediksi berbasis **Machine Learning** yang mampu mendeteksi mahasiswa berpotensi dropout sejak dini dan memberikan rekomendasi intervensi yang dapat ditindaklanjuti oleh pihak akademik.
 
 ### Permasalahan Bisnis
 
-1. Bagaimana memprediksi status akhir mahasiswa (Graduate, Dropout, atau Enrolled) berdasarkan data akademik dan non-akademik yang tersedia sejak semester pertama, sehingga institusi dapat melakukan intervensi lebih awal sebelum mahasiswa benar-benar dropout?
+1. Bagaimana memprediksi apakah seorang mahasiswa akan **Dropout atau Graduate** berdasarkan data akademik dan non-akademik yang tersedia, sehingga institusi dapat melakukan intervensi lebih awal sebelum mahasiswa benar-benar dropout?
 2. Faktor-faktor apa saja yang paling signifikan memengaruhi risiko dropout mahasiswa di Jaya Jaya Institut?
 3. Bagaimana membangun sistem early warning yang dapat diakses oleh tim akademik untuk memantau mahasiswa berisiko secara real-time?
 
@@ -31,8 +22,8 @@ Oleh karena itu dibutuhkan sebuah sistem prediksi berbasis **Machine Learning** 
 |------|-----------|
 | **Analisis Data (EDA)** | Eksplorasi mendalam terhadap 4.424 data mahasiswa untuk menemukan pola distribusi, tren, korelasi, dan faktor penyebab dropout |
 | **Business Dashboard** | Visualisasi interaktif menggunakan Looker Studio untuk monitoring status mahasiswa dan faktor risiko dropout |
-| **Machine Learning** | Pembangunan model prediksi dropout dengan Logistic Regression dan Random Forest dilengkapi hyperparameter tuning |
-| **Deployment** | Prototype sistem prediksi berbasis Streamlit yang dapat digunakan tim akademik untuk menginput data mahasiswa dan mendapat prediksi risiko |
+| **Machine Learning** | Pembangunan model prediksi Dropout vs Graduate menggunakan Logistic Regression dan Random Forest (data Enrolled dieksklusi dari training) |
+| **Deployment** | Prototype sistem prediksi berbasis Streamlit untuk tim akademik |
 
 ### Persiapan
 
@@ -43,65 +34,61 @@ https://raw.githubusercontent.com/dicodingacademy/dicoding_dataset/main/students
 
 Setup environment:
 ```bash
-# 1. Clone repository
+# Clone repository
 git clone https://github.com/ANDI-BACHDAR-DD/Submission_akhir_penerapan-data_science_Dicoding.git
 cd Submission_akhir_penerapan-data_science_Dicoding
 
-# 2. Buat dan aktifkan virtual environment
+# Buat dan aktifkan virtual environment
 python -m venv venv
 source venv/bin/activate  # Mac/Linux
-# venv\Scripts\activate   # Windows
 
-# 3. Install dependencies
+# Install dependencies
 pip install -r requirements.txt
 
-# 4. Jalankan notebook
-jupyter notebook notebook.ipynb
-
-# 5. Jalankan prototype Streamlit
+# Jalankan prototype Streamlit
 streamlit run app.py
 ```
 
 ## Business Dashboard
 
-Dashboard bisnis dibuat menggunakan **Looker Studio** untuk memberikan gambaran menyeluruh kepada manajemen akademik dan tim konselor Jaya Jaya Institut tentang kondisi dropout mahasiswa.
+Dashboard bisnis dibuat menggunakan **Looker Studio** untuk memberikan gambaran menyeluruh kepada manajemen akademik dan tim konselor Jaya Jaya Institut.
 
-Dashboard menampilkan visualisasi interaktif mencakup distribusi status mahasiswa, dropout rate berdasarkan gender (pria 45.1% vs wanita 25.1%), pengaruh status keuangan terhadap dropout (mahasiswa menunggak memiliki dropout rate 86.6%), pengaruh beasiswa (penerima beasiswa hanya 12.2% dropout), serta performa akademik rata-rata per status mahasiswa. Tersedia juga filter interaktif berdasarkan gender, program studi, dan status beasiswa.
+Dashboard menampilkan visualisasi:
+- **Distribusi Status Mahasiswa** — proporsi Graduate (49.9%), Dropout (32.1%), dan Enrolled (17.9%)
+- **Performa Akademik vs Status** — mahasiswa dengan nilai akademik rendah cenderung berisiko dropout lebih tinggi
+- **SKS Lulus vs Status** — mahasiswa dengan jumlah SKS yang disetujui rendah memiliki kecenderungan dropout lebih tinggi
+- **Finansial vs Dropout** — mahasiswa yang tidak melunasi biaya kuliah memiliki tingkat dropout jauh lebih tinggi
 
 🔗 **Link Dashboard:** https://lookerstudio.google.com/reporting/97c68282-4d17-454c-84fc-eb81f64408b7
 
 ## Menjalankan Sistem Machine Learning
 
-Sistem prediksi dropout dibangun menggunakan **Streamlit** yang memungkinkan tim akademik menginput data mahasiswa secara langsung dan mendapatkan prediksi risiko dropout beserta faktor utama yang berkontribusi.
+Sistem prediksi dropout dibangun menggunakan **Streamlit**. Model dilatih hanya menggunakan data mahasiswa dengan status **Dropout dan Graduate**. Data Enrolled digunakan untuk inferensi prediksi status akhir mahasiswa yang masih aktif, bukan sebagai data latih.
 
 ```bash
 streamlit run app.py
 ```
 
-Sistem menerima input data akademik mahasiswa (nilai, jumlah SKS, evaluasi) dan data non-akademik (status keuangan, beasiswa, usia), kemudian memberikan prediksi status mahasiswa beserta probabilitas setiap kelas dan faktor risiko utama yang terdeteksi.
-
 🔗 **Link Prototype:** https://submissionakhirpenerapan-datasciencedicoding-yrxhuip4mdm9gasti.streamlit.app/
 
 ## Conclusion
 
-Berdasarkan analisis menyeluruh terhadap dataset 4.424 mahasiswa Jaya Jaya Institut, ditemukan bahwa dropout mahasiswa dipicu oleh kombinasi faktor akademik dan non-akademik yang saling berinteraksi:
+Berdasarkan hasil analisis data dan visualisasi dashboard terhadap 4.424 mahasiswa Jaya Jaya Institut, ditemukan beberapa temuan utama:
 
-1. **Performa Akademik Rendah** adalah prediktor terkuat — mahasiswa dropout rata-rata hanya lulus 2.5 SKS di semester 1, jauh lebih rendah dibandingkan mahasiswa lulus yang rata-rata 6.2 SKS
-2. **Status Pembayaran Kuliah** menjadi faktor finansial paling kritis — 86.6% mahasiswa yang menunggak biaya kuliah mengalami dropout
-3. **Tidak Memiliki Beasiswa** meningkatkan risiko dropout signifikan — 38.7% vs hanya 12.2% pada penerima beasiswa
-4. **Usia Masuk Lebih Tua** berkorelasi dengan risiko dropout lebih tinggi — rata-rata usia dropout 26.1 tahun vs lulusan 21.8 tahun
-5. **Gender** — mahasiswa pria memiliki dropout rate 45.1%, jauh lebih tinggi dari wanita 25.1%
+**Distribusi Status Mahasiswa** — Dari total 4.424 mahasiswa, 49.9% berhasil Graduate, 32.1% Dropout, dan 17.9% masih Enrolled. Angka dropout hampir 1 dari 3 mahasiswa menunjukkan urgensi penanganan berbasis data.
 
-Model **Random Forest** yang telah dituning menghasilkan akurasi **76%** dan mampu digunakan sebagai sistem early warning untuk mendeteksi mahasiswa berisiko sejak semester pertama.
+**Performa Akademik** adalah faktor paling dominan — mahasiswa dengan nilai akademik rendah dan jumlah SKS lulus sedikit cenderung berisiko dropout lebih tinggi, sebagaimana terlihat jelas pada visualisasi "Performa Akademik vs Status" dan "SKS Lulus vs Status" di dashboard.
+
+**Faktor Finansial** terbukti kritis — mahasiswa yang tidak melunasi biaya kuliah memiliki tingkat dropout yang jauh lebih tinggi dibandingkan yang membayar tepat waktu, sesuai visualisasi "Finansial vs Dropout" di dashboard.
+
+**Model Machine Learning** — Logistic Regression yang dilatih hanya dengan data Dropout dan Graduate (mengeksklusi data Enrolled) menghasilkan performa tinggi dengan akurasi **94.2%** dan AUC **0.973**, membuktikan bahwa faktor akademik dan finansial yang teridentifikasi dari EDA memang menjadi prediktor kuat untuk mendeteksi risiko dropout.
 
 ### Rekomendasi Action Items
 
-- **Early Warning System** — Implementasikan sistem prediksi ini ke dashboard akademik untuk memantau mahasiswa dengan nilai rendah dan ketidakterlibatan evaluasi di semester 1
-- **Intervensi Finansial** — Buat program keringanan pembayaran, cicilan fleksibel, dan perluas akses beasiswa bagi mahasiswa yang menunggak karena kelompok ini memiliki dropout rate 86.6%
-- **Program Pendampingan Akademik** — Wajibkan bimbingan konseling bagi mahasiswa dengan kurang dari 3 SKS lulus di semester 1
-- **Program Khusus Mahasiswa Pria** — Buat program mentoring dan engagement khusus mengingat dropout rate pria jauh lebih tinggi
-- **Intervensi Mahasiswa Usia Dewasa** — Sediakan kelas malam atau program fleksibel untuk mahasiswa berusia di atas 25 tahun
-- **Pengembangan Model** — Tingkatkan performa model terutama untuk deteksi kelas dropout dengan teknik oversampling (SMOTE)
+- **Early Warning System** — Implementasikan sistem prediksi ini ke dashboard akademik untuk memantau mahasiswa dengan nilai rendah dan SKS lulus sedikit sejak semester 1
+- **Intervensi Finansial** — Buat program keringanan pembayaran, cicilan fleksibel, dan perluas akses beasiswa bagi mahasiswa yang menunggak biaya kuliah
+- **Program Pendampingan Akademik** — Wajibkan bimbingan konseling bagi mahasiswa dengan performa akademik rendah di semester pertama
+- **Prediksi Mahasiswa Enrolled** — Manfaatkan model untuk memprediksi kemungkinan status akhir mahasiswa yang masih Enrolled sebagai langkah proaktif deteksi dini
 - **Integrasi Sistem Akademik** — Integrasikan model prediksi dengan sistem informasi akademik kampus agar berjalan otomatis setiap akhir semester
 
 ---
