@@ -213,3 +213,14 @@ Sistem dibangun menggunakan Streamlit dengan alur:
    - Rekomendasi tindakan  
 
 Model ini dapat digunakan sebagai alat bantu dalam pengambilan keputusan akademik.
+
+Link Deploy streamlit: https://submissionakhirpenerapan-datasciencedicoding-yrxhuip4mdm9gasti.streamlit.app/
+Link Github: https://github.com/ANDI-BACHDAR-DD/Submission_akhir_penerapan-data_science_Dicoding.git
+
+## Dashboard
+
+Link Dahboard di lookerstudio :
+https://lookerstudio.google.com/reporting/97c68282-4d17-454c-84fc-eb81f64408b7
+
+Screenshot:
+<ANDI BACHDAR DD_dicoding>-dashboard.png
